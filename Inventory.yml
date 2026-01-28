@@ -1,0 +1,145 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Inventory Service
+servers:
+  - url: http://localhost:8080
+paths:
+  /inventory:
+    post:
+      summary: Add an item to a hero's inventory
+      operationId: insertInventoryItem
+      tags:
+        - inventory
+      responses:
+        '201':
+          description: Item added to the user's inventory
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InventoryItem"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InventoryItem"
+        description: Tree to insert
+    put:
+      summary: Update an item's quantity in a user's inventory
+      operationId: updateInventoryItem
+      tags:
+        - inventory
+      responses:
+        '200':
+          description: The user's inventory was updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryItem'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InventoryItem"
+        description: Inventory item to update
+    delete:
+      summary: Deletes an item from a user's inventory
+      operationId: deleteInventoryItem
+      tags:
+        - inventory
+      parameters:
+        - name: user
+          in: query
+          required: true
+          description: The user's id
+          schema:
+            type: number
+        - name: item
+          in: query
+          required: true
+          description: The item's id
+          schema:
+            type: number
+      responses:
+        '200':
+          description: User's inventory item was deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InventoryItem"
+  /inventory/{id_user}:
+    get:
+      summary: Fetch a user's inventory
+      operationId: getUserInventory
+      tags:
+        - inventory
+      parameters:
+        - name: id_user
+          in: path
+          required: true
+          description: The user's id
+          schema:
+            type: number
+      responses:
+        '200':
+          description: User's inventory was found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/InventoryItem"
+  /item/{id}:
+    get:
+      summary: Get an item from its id
+      operationId: getItem
+      tags:
+        - item
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The item's id
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Item's was found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Item"
+components:
+  schemas:
+    InventoryItem:
+      required:
+        - id_hero
+        - id_item
+        - amount
+      properties:
+        id_hero:
+          type: number
+        id_item:
+          type: number
+        amount:
+          type: number
+    Item:
+      required:
+        - id
+        - name
+        - usable
+        - quantity
+        - unit
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        usable:
+          type: boolean
+        quantity:
+          type: number
+        unit:
+          type: string
+
+
