@@ -7,13 +7,13 @@ servers:
 paths:
   /inventory:
     post:
-      summary: Add an item to a hero's inventory
-      operationId: insertInventoryItem
+      summary: Ajouter un objet dans l'inventaire d'un héros
+      operationId: ajouterObjetInventaire
       tags:
-        - inventory
+        - Inventory
       responses:
         '201':
-          description: Item added to the user's inventory
+          description: L'object a bien été ajouté à l'inventaire
           content:
             application/json:
               schema:
@@ -23,15 +23,15 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/InventoryItem"
-        description: Tree to insert
+        description: Objet à ajouter à l'inventaire (ainsi que sa quantité)
     put:
-      summary: Update an item's quantity in a user's inventory
-      operationId: updateInventoryItem
+      summary: Mettre à jour la quantité d'un objet dans l'inventaire d'un héros
+      operationId: majObjetInventaire
       tags:
         - inventory
       responses:
         '200':
-          description: The user's inventory was updated
+          description: L'inventaire a été mis à jour
           content:
             application/json:
               schema:
@@ -41,48 +41,48 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/InventoryItem"
-        description: Inventory item to update
+        description: L'objet à mettre à jour et sa quantité
     delete:
-      summary: Deletes an item from a user's inventory
-      operationId: deleteInventoryItem
+      summary: Supprimer un objet de l'inventaire d'un joueur
+      operationId: supprimerObjetInventaire
       tags:
-        - inventory
+        - Inventory
       parameters:
-        - name: user
+        - name: hero
           in: query
           required: true
-          description: The user's id
+          description: L'id du héros
           schema:
             type: number
         - name: item
           in: query
           required: true
-          description: The item's id
+          description: L'id de l'objet à supprimer
           schema:
             type: number
       responses:
         '200':
-          description: User's inventory item was deleted
+          description: L'objet a bien été supprimé de l'inventaire
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/InventoryItem"
   /inventory/{id_user}:
     get:
-      summary: Fetch a user's inventory
-      operationId: getUserInventory
+      summary: Récupérer l'inventaire d'un héro
+      operationId: rechercherInventaire
       tags:
-        - inventory
+        - Inventory
       parameters:
-        - name: id_user
+        - name: id_hero
           in: path
           required: true
-          description: The user's id
+          description: L'id du héros dont on recherche l'inventaire
           schema:
             type: number
       responses:
         '200':
-          description: User's inventory was found
+          description: L'inventaire a été trouvé
           content:
             application/json:
               schema:
@@ -91,20 +91,20 @@ paths:
                   $ref: "#/components/schemas/InventoryItem"
   /item/{id}:
     get:
-      summary: Get an item from its id
-      operationId: getItem
+      summary: Récupérer un objet grâce à son id
+      operationId: rechercherObjet
       tags:
-        - item
+        - Item
       parameters:
         - name: id
           in: path
           required: true
-          description: The item's id
+          description: L'id de l'objet
           schema:
             type: number
       responses:
         '200':
-          description: Item's was found
+          description: L'objet a bien été trouvé
           content:
             application/json:
               schema:
