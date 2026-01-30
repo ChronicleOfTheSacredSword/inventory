@@ -1,7 +1,6 @@
 import {InventoryRepositoryPort} from "../../application/ports/outbound/InventoryRepositoryPort";
 import {InventoryItem} from "../../domain/models/InventoryItem";
 import pool from "../../../db";
-const db = require('../../../db');
 
 class InventoryRepo implements InventoryRepositoryPort {
     async getInventoryById(id: number): Promise<InventoryItem[]>{

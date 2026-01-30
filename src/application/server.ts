@@ -8,6 +8,10 @@ import InventoryRepo from "../infrastructure/adapters/InventoryRepositoryAdapter
 import {InventoryService} from "../domain/services/InventoryService";
 import {InventoryController} from "../presentation/controllers/InventoryController";
 
+import ItemRepo from "../infrastructure/adapters/ItemRepositoryAdapter";
+import {ItemService} from "../domain/services/ItemService";
+import {ItemController} from "../presentation/controllers/ItemController";
+
 const app = express();
 app.use(express.json());
 
@@ -21,6 +25,11 @@ const inventoryRepo = new InventoryRepo();
 const inventoryService = new InventoryService(inventoryRepo);
 const inventoryController = new InventoryController(inventoryService);
 inventoryController.registerRoutes(app);
+
+const itemRepo = new ItemRepo();
+const itemService = new ItemService(itemRepo);
+const itemController = new ItemController(itemService);
+itemController.registerRoutes(app);
 
 app.use(errorHandler);
 
