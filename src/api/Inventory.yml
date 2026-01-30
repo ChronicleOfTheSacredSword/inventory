@@ -89,10 +89,43 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/InventoryItem"
+  /item:
+    get:
+      summary: Récupérer tous les objets
+      operationId: getAllItems
+      tags:
+        - Item
+      responses:
+        '200':
+          description: L'objet a bien été trouvé
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Item"
+    post:
+      summary: Ajouter un objet
+      operationId: insertItem
+      tags:
+        - Item
+      responses:
+        '201':
+          description: L'objet a bien été ajouté à l'inventaire
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Item"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Item"
+        description: Objet à ajouter
   /item/{id}:
     get:
       summary: Récupérer un objet grâce à son id
-      operationId: rechercherObjet
+      operationId: getItemById
       tags:
         - Item
       parameters:
@@ -109,6 +142,26 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Item"
+    delete:
+      summary: Supprimer un objet
+      operationId: deleteItem
+      tags:
+        - Item
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: L'id de l'objet à supprimer
+          schema:
+            type: number
+      responses:
+        '200':
+          description: L'objet a bien été supprimé
+          content:
+            application/json:
+              schema:
+                type: number
+                description: Id de l'objet supprimé
 components:
   schemas:
     InventoryItem:

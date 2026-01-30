@@ -33,7 +33,7 @@ class ItemRepo implements ItemRepositoryPort {
 
     async deleteItem(id: number): Promise<number | null>{
         try{
-            await pool.query({
+            const res = await pool.query({
                 text: 'DELETE FROM item WHERE id=$1;',
                 values: [id]
             })

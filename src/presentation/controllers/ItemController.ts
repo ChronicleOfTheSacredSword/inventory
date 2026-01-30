@@ -7,9 +7,9 @@ export class ItemController {
 
   registerRoutes(app: Express) {
     app.get('/item', this.getAllItems.bind(this));
-    app.get('/item/:id', this.getItemById.bind(this));
     app.post('/item', this.insertItem.bind(this));
-    app.delete('/item', this.deleteItem.bind(this));
+    app.get('/item/:id', this.getItemById.bind(this));
+    app.delete('/item/:id', this.deleteItem.bind(this));
   }
 
 
@@ -44,7 +44,7 @@ export class ItemController {
     if (deleted === null) {
       res.status(404).send({message: `Item ${req.params.id} could not be deleted`});
     } else {
-      res.status(200).send(deleted);
+      res.status(200).send({message: `Item ${deleted} deleted`});
     }
   }
 }
