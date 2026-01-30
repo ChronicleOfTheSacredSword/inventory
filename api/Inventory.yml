@@ -1,7 +1,7 @@
 openapi: "3.0.0"
 info:
   version: 1.0.0
-  title: Inventory Service
+  title: Service Inventory
 servers:
   - url: http://localhost:8080
 paths:
@@ -13,7 +13,7 @@ paths:
         - Inventory
       responses:
         '201':
-          description: L'object a bien été ajouté à l'inventaire
+          description: L'objet a bien été ajouté à l'inventaire
           content:
             application/json:
               schema:
@@ -28,7 +28,7 @@ paths:
       summary: Mettre à jour la quantité d'un objet dans l'inventaire d'un héros
       operationId: majObjetInventaire
       tags:
-        - inventory
+        - Inventory
       responses:
         '200':
           description: L'inventaire a été mis à jour
