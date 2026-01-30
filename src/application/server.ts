@@ -1,10 +1,12 @@
 import express from 'express';
-import path from 'path';
 import * as fs from "node:fs";
 import * as YAML from 'yaml';
 import swaggerUi from 'swagger-ui-express';
 
 import { errorHandler } from "./errorHandling";
+import InventoryRepo from "../infrastructure/adapters/InventoryRepositoryAdapter";
+import {InventoryService} from "../domain/services/InventoryService";
+import {InventoryController} from "../presentation/controllers/InventoryController";
 
 const app = express();
 app.use(express.json());
@@ -15,15 +17,10 @@ const swaggerDocument = YAML.parse(file)
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-// const treeRepo = new TreeRepositoryAdapter();
-// const treeService = new TreeService(treeRepo);
-// const treeController = new TreeController(treeService);
-// treeController.registerRoutes(app);
-//
-// const forestRepo = new ForestRepositoryAdapter();
-// const forestService = new ForestService(forestRepo);
-// const forestController = new ForestController(forestService);
-// forestController.registerRoutes(app);
+const inventoryRepo = new InventoryRepo();
+const inventoryService = new InventoryService(inventoryRepo);
+const inventoryController = new InventoryController(inventoryService);
+inventoryController.registerRoutes(app);
 
 app.use(errorHandler);
 

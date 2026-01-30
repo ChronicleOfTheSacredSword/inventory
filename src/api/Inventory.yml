@@ -8,7 +8,7 @@ paths:
   /inventory:
     post:
       summary: Ajouter un objet dans l'inventaire d'un héros
-      operationId: ajouterObjetInventaire
+      operationId: insertInventoryItem
       tags:
         - Inventory
       responses:
@@ -26,7 +26,7 @@ paths:
         description: Objet à ajouter à l'inventaire (ainsi que sa quantité)
     put:
       summary: Mettre à jour la quantité d'un objet dans l'inventaire d'un héros
-      operationId: majObjetInventaire
+      operationId: updateInventoryItem
       tags:
         - Inventory
       responses:
@@ -44,7 +44,7 @@ paths:
         description: L'objet à mettre à jour et sa quantité
     delete:
       summary: Supprimer un objet de l'inventaire d'un joueur
-      operationId: supprimerObjetInventaire
+      operationId: deleteInventoryItem
       tags:
         - Inventory
       parameters:
@@ -70,7 +70,7 @@ paths:
   /inventory/{id_user}:
     get:
       summary: Récupérer l'inventaire d'un héro
-      operationId: rechercherInventaire
+      operationId: getInventoryById
       tags:
         - Inventory
       parameters:
