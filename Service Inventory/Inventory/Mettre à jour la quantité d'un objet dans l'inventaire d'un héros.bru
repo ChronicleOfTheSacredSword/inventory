@@ -1,0 +1,59 @@
+meta {
+  name: Mettre à jour la quantité d'un objet dans l'inventaire d'un héros
+  type: http
+  seq: 2
+}
+
+put {
+  url: {{baseUrl}}/inventory
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "id_hero": 0,
+    "id_item": 0,
+    "amount": 0
+  }
+}
+
+example {
+  name: 200 Response
+  description: L'inventaire a été mis à jour
+  
+  request: {
+    url: {{baseUrl}}/inventory
+    method: PUT
+    mode: json
+    body:json: {
+      {
+        "id_hero": 0,
+        "id_item": 0,
+        "amount": 0
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "id_hero": 0,
+          "id_item": 0,
+          "amount": 0
+        }
+      '''
+    }
+  }
+}

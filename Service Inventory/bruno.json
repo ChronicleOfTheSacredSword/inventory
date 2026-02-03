@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "Service Inventory",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

@@ -1,0 +1,47 @@
+meta {
+  name: Supprimer un objet
+  type: http
+  seq: 4
+}
+
+delete {
+  url: {{baseUrl}}/item/:id
+  body: none
+  auth: inherit
+}
+
+params:path {
+  id: 
+}
+
+example {
+  name: 200 Response
+  description: L'objet a bien été supprimé
+  
+  request: {
+    url: {{baseUrl}}/item/:id
+    method: DELETE
+    mode: none
+    params:path: {
+      id: 
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        0
+      '''
+    }
+  }
+}

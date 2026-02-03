@@ -5,7 +5,7 @@ import pool from "../../../db";
 class InventoryRepo implements InventoryRepositoryPort {
     async getInventoryById(id: number): Promise<InventoryItem[]>{
         const res = await pool.query({
-            text: 'SELECT * FROM inventory WHERE id_hero=$1;',
+            text: 'SELECT id, name, usable, quantity, unit, amount FROM inventory JOIN item ON inventory.id_item = item.id WHERE id_hero=$1;',
             values: [id]
         })
         return res.rows ?? null;

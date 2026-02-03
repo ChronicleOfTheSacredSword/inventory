@@ -1,0 +1,53 @@
+meta {
+  name: Supprimer un objet de l'inventaire d'un joueur
+  type: http
+  seq: 3
+}
+
+delete {
+  url: {{baseUrl}}/inventory
+  body: none
+  auth: inherit
+}
+
+params:query {
+  hero: 
+  item: 
+}
+
+example {
+  name: 200 Response
+  description: L'objet a bien été supprimé de l'inventaire
+  
+  request: {
+    url: {{baseUrl}}/inventory
+    method: DELETE
+    mode: none
+    params:query: {
+      hero: 
+      item: 
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "id_hero": 0,
+          "id_item": 0,
+          "amount": 0
+        }
+      '''
+    }
+  }
+}

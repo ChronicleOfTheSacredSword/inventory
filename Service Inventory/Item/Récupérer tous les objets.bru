@@ -1,0 +1,48 @@
+meta {
+  name: Récupérer tous les objets
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/item
+  body: none
+  auth: inherit
+}
+
+example {
+  name: 200 Response
+  description: L'objet a bien été trouvé
+  
+  request: {
+    url: {{baseUrl}}/item
+    method: GET
+    mode: none
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        [
+          {
+            "id": 0,
+            "name": "",
+            "usable": false,
+            "quantity": 0,
+            "unit": ""
+          }
+        ]
+      '''
+    }
+  }
+}

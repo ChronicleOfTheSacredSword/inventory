@@ -1,0 +1,53 @@
+meta {
+  name: Récupérer un objet grâce à son id
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/item/:id
+  body: none
+  auth: inherit
+}
+
+params:path {
+  id: 1
+}
+
+example {
+  name: 200 Response
+  description: L'objet a bien été trouvé
+  
+  request: {
+    url: {{baseUrl}}/item/:id
+    method: GET
+    mode: none
+    params:path: {
+      id: 
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "id": 0,
+          "name": "",
+          "usable": false,
+          "quantity": 0,
+          "unit": ""
+        }
+      '''
+    }
+  }
+}

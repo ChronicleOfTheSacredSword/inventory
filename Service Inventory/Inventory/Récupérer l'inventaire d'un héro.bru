@@ -1,0 +1,53 @@
+meta {
+  name: Récupérer l'inventaire d'un héro
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{baseUrl}}/inventory/:id_hero
+  body: none
+  auth: inherit
+}
+
+params:path {
+  id_hero: 0
+}
+
+example {
+  name: 200 Response
+  description: L'inventaire a été trouvé
+  
+  request: {
+    url: {{baseUrl}}/inventory/:id_user
+    method: GET
+    mode: none
+    params:path: {
+      id_hero: 
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        [
+          {
+            "id_hero": 0,
+            "id_item": 0,
+            "amount": 0
+          }
+        ]
+      '''
+    }
+  }
+}

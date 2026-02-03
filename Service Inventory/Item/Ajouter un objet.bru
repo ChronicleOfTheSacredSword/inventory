@@ -1,0 +1,64 @@
+meta {
+  name: Ajouter un objet
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/item
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "name": "Bourse volée",
+    "usable": true,
+    "quantity": 210,
+    "unit": "GOLD"
+  }
+}
+
+example {
+  name: 201 Response
+  description: L'objet a bien été ajouté à l'inventaire
+  
+  request: {
+    url: {{baseUrl}}/item
+    method: POST
+    mode: json
+    body:json: {
+      {
+        "id": 0,
+        "name": "",
+        "usable": false,
+        "quantity": 0,
+        "unit": ""
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 201
+      text: Created
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "id": 0,
+          "name": "",
+          "usable": false,
+          "quantity": 0,
+          "unit": ""
+        }
+      '''
+    }
+  }
+}
