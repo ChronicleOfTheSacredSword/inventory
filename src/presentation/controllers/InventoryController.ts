@@ -1,15 +1,16 @@
 import { InventoryServicePort } from "../../application/ports/inbound/InventoryServicePort";
 import { Express, Response, Request } from "express";
 import {InventoryItem} from "../../domain/models/InventoryItem";
+import authenticateToken from "./authJWToken";
 
 export class InventoryController {
   constructor(private inventoryService: InventoryServicePort) {}
 
   registerRoutes(app: Express) {
-    app.post('/inventory', this.insertInventoryItem.bind(this));
-    app.put('/inventory', this.updateInventoryItem.bind(this));
-    app.delete('/inventory', this.deleteInventoryItem.bind(this));
-    app.get('/inventory/:id_hero', this.getInventoryById.bind(this));
+    app.post('/inventory', authenticateToken, this.insertInventoryItem.bind(this));
+    app.put('/inventory', authenticateToken, this.updateInventoryItem.bind(this));
+    app.delete('/inventory', authenticateToken, this.deleteInventoryItem.bind(this));
+    app.get('/inventory/:id_hero', authenticateToken, this.getInventoryById.bind(this));
   }
 
 

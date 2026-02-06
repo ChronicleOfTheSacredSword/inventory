@@ -1,15 +1,16 @@
 import {ItemServicePort} from "../../application/ports/inbound/ItemServicePort";
 import {Express, Response, Request} from "express";
 import {Item} from "../../domain/models/Item";
+import authenticateToken from "./authJWToken";
 
 export class ItemController {
   constructor(private itemService: ItemServicePort) {}
 
   registerRoutes(app: Express) {
-    app.get('/item', this.getAllItems.bind(this));
-    app.post('/item', this.insertItem.bind(this));
-    app.get('/item/:id', this.getItemById.bind(this));
-    app.delete('/item/:id', this.deleteItem.bind(this));
+    app.get('/item', authenticateToken, this.getAllItems.bind(this));
+    app.post('/item', authenticateToken, this.insertItem.bind(this));
+    app.get('/item/:id', authenticateToken, this.getItemById.bind(this));
+    app.delete('/item/:id', authenticateToken, this.deleteItem.bind(this));
   }
 
 

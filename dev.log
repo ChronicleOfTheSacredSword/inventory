@@ -1,0 +1,8 @@
+
+> inventory@1.0.0 dev
+> ts-node-dev --respawn --transpile-only src/application/server.ts
+
+[INFO] 17:58:09 ts-node-dev ver. 2.0.0 (using ts-node ver. 10.9.2, typescript ver. 5.9.3)
+[dotenv@17.2.3] injecting env (8) from .env -- tip: 👥 sync secrets across teammates & machines: https://dotenvx.com/ops
+Server listening on http://localhost:5005
+Swagger docs at http://localhost:5005/docs
